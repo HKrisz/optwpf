@@ -5,7 +5,15 @@ module "files" {
   number_of_files  = 5
 }
 
+module "read" {
+  source      = "./modules/read"
+  input_files = module.files.file_names
+}
+
 output "generated_files" {
   value = module.files.file_names
 }
- 
+
+output "read_files" {
+  value = module.read.prefixed_files
+}
