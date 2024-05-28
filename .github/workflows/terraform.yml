@@ -15,6 +15,7 @@ jobs:
     environment: production
 
     steps:
+<<<<<<< HEAD
       - name: 'Checkout GitHub Actions'
         uses: actions/checkout@v2
 
@@ -33,4 +34,23 @@ jobs:
       - name: 'Terraform Apply'
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve
- 
+=======
+      - name: 'Checkout repository'
+        uses: actions/checkout@v2
+
+      - name: 'Setup Terraform'
+        uses: hashicorp/setup-terraform@v1
+
+      - name: 'Terraform Init'
+        run: terraform init
+
+      - name: 'Terraform Validate'
+        run: terraform validate
+
+      - name: 'Terraform Plan'
+        run: terraform plan
+
+      - name: 'Terraform Apply'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve
+>>>>>>> (commit hash)
