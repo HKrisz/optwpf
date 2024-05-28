@@ -1,8 +1,11 @@
-provider "aws" {
-  region = "europe"
+module "files" {
+  source           = "./modules/files"
+  file_contents    = { for i in range(5) : i => "Content for file ${i}" }
+  file_prefix      = "example_file"
+  number_of_files  = 5
 }
 
-resource "aws_s3_bucket" "my_bucket" {
-  bucket = "my-tf-test-bucket"
-  acl    = "private"
+output "generated_files" {
+  value = module.files.file_names
 }
+ 
